@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en-US">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Psych V1 to Legacy</title>
+<title>Psych Chart Converter</title>
 <style>
-    body { font-family: Arial, sans-serif; background: #121212; color: #eee; padding: 20px; }
-    h1 { color: #00ff99; }
+    body { font-family: Arial, sans-serif; background: #000000; color: #eee; padding: 20px; }
+    h1 { color: #0000ff; }
     input, button { margin-top: 10px; padding: 8px; font-size: 16px; }
     #dropArea {
         margin-top: 20px;
@@ -16,18 +16,18 @@
         color: #aaa;
         transition: background 0.3s;
     }
-    #dropArea.dragover { background: #1f1f1f; color: #00ff99; }
+    #dropArea.dragover { background: #000000; color: #0000ff; }
     pre { background: #222; padding: 10px; overflow-x: auto; max-height: 300px; white-space: pre-wrap; }
     .success { color: #00ff00; }
     .error { color: #ff5555; }
 </style>
 </head>
 <body>
-<h1>Psych V1 to Legacy</h1>
-<p>Arraste e solte arquivos JSON ou clique para selecionar múltiplos arquivos.</p>
+<h1>Psych Chart Converter</h1>
+<p>Drag and drop JSON files or click to select multiple files.</p>
 
 <input type="file" id="fileInput" accept=".json" multiple>
-<div id="dropArea">Ou arraste os arquivos aqui</div>
+<div id="dropArea">Or drag and drop the files here.</div>
 
 <pre id="output"></pre>
 
@@ -55,7 +55,7 @@ function handleFiles(files) {
     output.textContent = '';
     for (let file of files) {
         if (!file.name.endsWith('.json')) {
-            output.textContent += `❌ Ignorando ${file.name} (não é JSON)\n`;
+            output.textContent += `❌ Ignoring ${file.name} (not JSON)\n`;
             continue;
         }
         convertFile(file);
@@ -83,7 +83,7 @@ function convertFile(file) {
             }
 
             // Marca formato
-            chart.format = 'psych_legacy_convert';
+            chart.format = 'Psych_Chart_Converter';
 
             const finalJson = JSON.stringify({ song: chart }, null, 4);
 
@@ -98,10 +98,10 @@ function convertFile(file) {
             a.download = fileName;
             a.click();
 
-            output.textContent += `✅ ${file.name} convertido com sucesso!\n`;
+            output.textContent += `✅ ${file.name} converted successfully!\n`;
             output.className = "success";
         } catch (err) {
-            output.textContent += `❌ Erro ao converter ${file.name}: ${err}\n`;
+            output.textContent += `❌ Error converting ${file.name}: ${err}\n`;
             output.className = "error";
         }
     };
